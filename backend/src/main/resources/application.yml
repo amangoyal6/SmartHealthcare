@@ -1,0 +1,49 @@
+git server:
+  port: ${SERVER_PORT:8081}
+
+spring:
+  application:
+    name: SmartHealthcare
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/smarthealthcare?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USERNAME:}
+    password: ${DB_PASSWORD:}
+  sql:
+    init:
+      mode: ${SQL_INIT_MODE:never}
+  jpa:
+    defer-datasource-initialization: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+app:
+  jwt-secret: ${JWT_SECRET:}
+  jwt-expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  upload-dir: ${UPLOAD_DIR:uploads}
+  openai-api-key: ${OPENAI_API_KEY:}
+  openai-model: ${OPENAI_MODEL:gpt-4o-mini}
+  twilio-account-sid: ${TWILIO_ACCOUNT_SID:}
+  twilio-auth-token: ${TWILIO_AUTH_TOKEN:}
+  twilio-from-number: ${TWILIO_FROM_NUMBER:}
+  razorpay-key-id: ${RAZORPAY_KEY_ID:}
+  razorpay-key-secret: ${RAZORPAY_KEY_SECRET:}
