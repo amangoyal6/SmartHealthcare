@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 .metadata/
+**/.metadata/
+**/node_modules/
+**/dist/
+**/target/
+**/.settings/
+**/.env
+**/.env.*.metadata/
 **/.metadata/
 **/node_modules/
 **/dist/
@@ -10,3 +18,14 @@
 **/*.log
 **/*.pid
 backend/uploads/
+!**/.env.example
+**/*.log
+**/*.pid
+backend/uploads/
+=======
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+>>>>>>> 8f713ba7d78f7def80b9deeccf78a1b8c38bb3aa

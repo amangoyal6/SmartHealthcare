@@ -1,30 +1,30 @@
 # SmartHealthcare
 
-Full stack healthcare management web application with React, Spring Boot, MySQL, JWT auth, local PDF storage, WebSocket emergency alerts, OTP/email verification hooks, and AI chatbot integration points.
+SmartHealthcare is a full-stack healthcare management platform built with React, Spring Boot, and MySQL. It supports doctor appointments, telemedicine, lab tests, sample collection, prescription-based medicine ordering, live health monitoring, emergency alerts, and AI chatbot integration.
 
 ## Project Structure
 
 ```text
 SmartHealthcare/
-  frontend/
-  backend/
-  database/
-  docs/
+├── frontend/
+├── backend/
+├── database/
+└── docs/
 ```
 
 ## Features
 
 - Patient, Doctor, Admin, Laboratory, and Pharmacy roles
-- JWT login and role-based backend protection
-- Doctor/lab/pharmacy approval workflow
-- Patient smartwatch data, live vitals dashboard, emergency alert logic
-- Appointment slots with duplicate-booking prevention
+- JWT authentication and role-based backend protection
+- Doctor, lab, and pharmacy approval workflows
+- Patient smartwatch data and live vitals dashboard
+- Emergency alert logic and WebSocket notifications
+- Appointment booking with duplicate-booking prevention
 - Lab test booking and report PDF upload
 - Prescription PDF upload and medicine ordering
 - Admin analytics and approval controls
-- OpenAI-ready AI chatbot with disease-specific fallback guidance
-- WebSocket topic for emergency alerts
-- Responsive blue/white healthcare UI with glassmorphism, dark mode, cards, charts, tables, notification bell, and telemedicine screen
+- AI chatbot integration points
+- Responsive healthcare interface with dark mode, charts, and telemedicine screen
 
 ## Requirements
 
@@ -40,11 +40,9 @@ mysql -u root -p < database/schema.sql
 mysql -u root -p < database/seed.sql
 ```
 
-Spring Boot does not auto-run `data.sql` by default, so an existing database will not be overwritten on every startup. Set `SQL_INIT_MODE=always` only when you intentionally want Spring to run `backend/src/main/resources/data.sql`.
+Spring Boot does not automatically run `data.sql` by default. Set `SQL_INIT_MODE=always` only when you intentionally want Spring to execute it.
 
-All seeded users use password `admin123`.
-
-Demo accounts:
+Seeded demo accounts use password `admin123`:
 
 - Admin: `9000000000`
 - Patient: `9876543210`
@@ -60,11 +58,7 @@ cp .env.example .env
 mvn spring-boot:run
 ```
 
-Swagger UI:
-
-```text
-http://localhost:8081/swagger-ui/index.html
-```
+Swagger UI: `http://localhost:8081/swagger-ui/index.html`
 
 ## Frontend Setup
 
@@ -75,27 +69,25 @@ npm install
 npm run dev
 ```
 
-Frontend URL:
-
-```text
-http://localhost:3000
-```
+Frontend URL: `http://localhost:3000`
 
 ## Environment Variables
 
-Backend variables are listed in `backend/.env.example`; frontend variables are listed in `frontend/.env.example`.
+Backend variables are listed in `backend/.env.example`, and frontend variables are listed in `frontend/.env.example`.
 
-For production, replace:
+Configure your own credentials for:
 
-- `JWT_SECRET`
-- MySQL credentials
-- `OPENAI_API_KEY`
-- Twilio credentials
-- SMTP credentials. The default sender is `amangoyal682003@gmail.com`; set `MAIL_PASSWORD` to a Gmail App Password for approval/rejection emails to actually send.
-- Razorpay credentials. Set `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` from Razorpay Dashboard API Keys. Without keys, the app uses a local demo payment fallback.
+- MySQL
+- JWT secret
+- OpenAI API
+- Twilio
+- SMTP
+- Razorpay
 
-Razorpay Checkout supports UPI, cards, net banking, wallets, and other methods enabled in your Razorpay account. SmartHealthcare creates a Razorpay order on the backend, opens Checkout on the frontend, then verifies the payment signature on the backend before saving payment success.
+Never commit real passwords, API keys, or other private credentials.
 
 ## Notes
 
-The Twilio, Firebase, Google Fit, Jitsi, and OpenAI pieces are implemented as integration-ready hooks or URLs. Real vendor credentials and SDK flows should be added before production deployment.
+Twilio, Firebase, Google Fit, Jitsi, and OpenAI integrations require valid vendor credentials and any additional production configuration before deployment.
+
+Razorpay payment processing requires valid API keys configured through environment variables. Without credentials, the application may use its local demo payment fallback.
